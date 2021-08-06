@@ -1,0 +1,31 @@
+```{r setupintro, include=FALSE}
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+library(knitr) 
+library(tidyverse)
+theme_set(bayesplot::theme_default())
+opts_chunk$set(
+  echo = F, message = F, warning = F, fig.height = 6, fig.width = 8,
+  cache = T, cache.lazy = F)
+```
+
+# Introduction {-}
+
+Tysklind et al (in prep) used 20 Symphonia juveniles from the transplantation garden experiment for transcriptomic analysis. 
+The analysis followed the scheme suggested by @Lopez-Maestre2016 (Fig. \@ref(fig:LopezMaestre2016)). 
+First, reads were assembled with Trinity into transcripts. 
+In parrallel, SNPs were detected with `Kissplice`. 
+Then SNPs have been mapped on the transcritpome with `BLAT`. 
+In parrallel SNPs have been tested to be morphotype-specific at the level ($P<0.001$) with `KissDE`
+and transcriptome Open Reading Frames (ORF) have been identified with `Transdecoder`.
+Finally, SNPs functional impact have been evaluated through `k2rt`.
+
+```{r LopezMaestre2016, fig.cap="Analysis scheme from @Lopez-Maestre2016."}
+include_graphics("https://phdpages.netlify.app/6b189d4142e8224bff99e28abd11cbfdd50c51b1/symcapture/symcapture_data/analysisScheme.jpeg")
+```
+
+## ToDo
+
+- [ ] SNPs specific to the species
+- [ ] SNPs specific to the environmental conditions
+- [ ] Identify *S. sp.3*
+- [ ] Test for hybrids individuals (W424 19 & 26)
