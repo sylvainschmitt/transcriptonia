@@ -1,3 +1,4 @@
 fig:LopezMaestre2016
 todo
-chapter
+snakemake
+species-specific

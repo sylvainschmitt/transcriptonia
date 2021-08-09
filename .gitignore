@@ -4,3 +4,6 @@ _bookdown_files
 .Rhistory
 .RData
 data
+results
+.snakemake
+dag
