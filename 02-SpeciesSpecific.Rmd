@@ -14,78 +14,29 @@ opts_chunk$set(
 
 This chapter support..
 
-```{r}
-snps <- vroom::vroom("results/species_specific_snps/results_coherent_type_0a.tsv") %>% 
-  dplyr::rename(snp = `#1.ID`, length_diff = `2.Length_diff`, 
-                pvalue = `77.Adjusted_pvalue`, df_dpsi = `78.Deltaf/DeltaPSI`, lowcounts = `79.lowcounts`) %>% 
-  reshape2::melt(c("snp", "length_diff", "pvalue", "df_dpsi", "lowcounts"),
-                 variable.name = "individual", value.name = "count") %>% 
-  separate(individual, paste0("X", 1:5)) %>% 
-  mutate(individual = paste0(X3, "_", X4)) %>% 
-  dplyr::rename(species = X3) %>% 
-  dplyr::select(-X1, -X2, -X5, -X4) %>% 
-  mutate(species = recode(species, "glo" = "S. globulifera", "sp1" = "S. sp.1")) 
+## Single-SNPs 
 
-ggplot(filter(snps, snp %in% unique(snps$snp)[1:100]),
-       aes(individual, snp, fill = species, alpha = log(count))) +
-  geom_tile() +
-  theme(axis.text = element_blank(), axis.ticks = element_blank(), axis.line = element_blank()) +
-  xlab("Individuals") + ylab("SNPs")
-```
+## Multi-SNPs
 
-```{r}
-library(kissDE)
-infile <- "data/symphonia.trinity500.kissDE.reduced/results_reduced_type_0a.fa"
-outfile <- "results/species_specific_snps/results_reduced_type_0a.fa"
-conditions <- c(rep("glo",14), 
-                rep("sp1", 23)) # species
-counts <- kissplice2counts(
-  infile,
-  pairedEnd = T,
-  counts = 0
-)
-dev <- diffExpressedVariants(
-  counts$countsEvents, 
-  conditions, 
-  filterLowCountsVariants = 100, # kissplice2counts parameter
-  pvalue = 0.001 # kissplice2counts parameter
-)
-# writeOutputKissDE(dev, outfile)
+## Alternative splicings
 
-dev$finalTable
+## Microsattelite
 
-snps <- vroom::vroom("results/species_specific_snps/results_reduced_type_0a.fa") %>% 
-  dplyr::rename(snp = `#1.ID`, length_diff = `2.Length_diff`, 
-                pvalue = `77.Adjusted_pvalue`, df_dpsi = `78.Deltaf/DeltaPSI`, lowcounts = `79.lowcounts`) %>% 
-  reshape2::melt(c("snp", "length_diff", "pvalue", "df_dpsi", "lowcounts"),
-                 variable.name = "individual", value.name = "count") %>% 
-  separate(individual, paste0("X", 1:5)) %>% 
-  mutate(individual = paste0(X3, "_", X4)) %>% 
-  dplyr::rename(species = X3) %>% 
-  dplyr::select(-X1, -X2, -X5, -X4) %>% 
-  mutate(species = recode(species, "glo" = "S. globulifera", "sp1" = "S. sp.1")) 
-
-ggplot(filter(snps, snp %in% unique(snps$snp)[1:100]),
-       aes(individual, snp, fill = species, alpha = log(count))) +
-  geom_tile() +
-  theme(axis.text = element_blank(), axis.ticks = element_blank(), axis.line = element_blank()) +
-  xlab("Individuals") + ylab("SNPs")
-
-dev$finalTable %>% 
-  dplyr::rename(snp = ID, length_diff = Length_diff, 
-                pvalue = Adjusted_pvalue, dfdpsi = `Deltaf/DeltaPSI`) %>% 
-  reshape2::melt(c("snp", "length_diff", "pvalue", "dfdpsi", "lowcounts"),
-                 variable.name = "variant", value.name = "count") %>% 
-  separate(variant, c("variant", "species", "individual", "norm")) %>% 
-  dplyr::select(-norm) %>% 
-  mutate(species = recode(species, "glo" = "S. globulifera", "sp1" = "S. sp.1")) %>% 
+```{r msatspsp}
+vroom::vroom("results/species_specific_snps/results_coherent_type_2.tsv") %>% 
   filter(count > 0) %>% 
-  ggplot(aes(paste(species, individual), paste(snp, variant), fill = count, alpha = count)) +
+  ggplot(aes(individual, snp, fill = log10(count))) +
   geom_tile() +
-  theme(axis.text = element_blank(), axis.ticks.y = element_blank(), axis.line = element_blank()) +
-  xlab("Individuals") + ylab("SNPs") +
+  theme(axis.text = element_blank(), axis.line = element_blank(),
+        legend.position = "bottom") +
+  xlab("Individual") + ylab("SNP") +
   facet_grid(~ variant + species, scales = "free_x", space = "free_x") +
-  viridis::scale_fill_viridis(option = "C")
+  viridis::scale_fill_viridis(option = "C") +
+  ggtitle(
+    paste("N =", length(unique(vroom::vroom("results/species_specific_snps/results_coherent_type_2.tsv")$snp)))
+  )
 ```
 
+## Indels
 
+## Others

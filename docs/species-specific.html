@@ -24,7 +24,7 @@
 <meta name="author" content="Sylvain Schmitt" />
 
 
-<meta name="date" content="2021-08-09" />
+<meta name="date" content="2021-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -75,7 +75,14 @@
 <li class="chapter" data-level="0.1" data-path="introduction.html"><a href="introduction.html#todo"><i class="fa fa-check"></i><b>0.1</b> ToDo</a></li>
 <li class="chapter" data-level="0.2" data-path="introduction.html"><a href="introduction.html#snakemake"><i class="fa fa-check"></i><b>0.2</b> Snakemake</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="species-specific.html"><a href="species-specific.html"><i class="fa fa-check"></i><b>1</b> Species-specific</a></li>
+<li class="chapter" data-level="1" data-path="species-specific.html"><a href="species-specific.html"><i class="fa fa-check"></i><b>1</b> Species-specific</a><ul>
+<li class="chapter" data-level="1.1" data-path="species-specific.html"><a href="species-specific.html#single-snps"><i class="fa fa-check"></i><b>1.1</b> Single-SNPs</a></li>
+<li class="chapter" data-level="1.2" data-path="species-specific.html"><a href="species-specific.html#multi-snps"><i class="fa fa-check"></i><b>1.2</b> Multi-SNPs</a></li>
+<li class="chapter" data-level="1.3" data-path="species-specific.html"><a href="species-specific.html#alternative-splicings"><i class="fa fa-check"></i><b>1.3</b> Alternative splicings</a></li>
+<li class="chapter" data-level="1.4" data-path="species-specific.html"><a href="species-specific.html#microsattelite"><i class="fa fa-check"></i><b>1.4</b> Microsattelite</a></li>
+<li class="chapter" data-level="1.5" data-path="species-specific.html"><a href="species-specific.html#indels"><i class="fa fa-check"></i><b>1.5</b> Indels</a></li>
+<li class="chapter" data-level="1.6" data-path="species-specific.html"><a href="species-specific.html#others"><i class="fa fa-check"></i><b>1.6</b> Others</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -106,7 +113,26 @@ This book is in <b><a href="open.html#open">Open Review</a></b>. I want your fee
 <p>SNPs specific to the species</p>
 </blockquote>
 <p>This chapter support..</p>
+<div id="single-snps" class="section level2">
+<h2><span class="header-section-number">1.1</span> Single-SNPs</h2>
+</div>
+<div id="multi-snps" class="section level2">
+<h2><span class="header-section-number">1.2</span> Multi-SNPs</h2>
+</div>
+<div id="alternative-splicings" class="section level2">
+<h2><span class="header-section-number">1.3</span> Alternative splicings</h2>
+</div>
+<div id="microsattelite" class="section level2">
+<h2><span class="header-section-number">1.4</span> Microsattelite</h2>
+<p><img src="transcriptonia_files/figure-html/msatspsp-1.png" width="768" /></p>
+</div>
+<div id="indels" class="section level2">
+<h2><span class="header-section-number">1.5</span> Indels</h2>
+</div>
+<div id="others" class="section level2">
+<h2><span class="header-section-number">1.6</span> Others</h2>
 
+</div>
 </div>
             </section>
 
@@ -166,20 +192,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

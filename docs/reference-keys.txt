@@ -2,3 +2,9 @@ fig:LopezMaestre2016
 todo
 snakemake
 species-specific
+single-snps
+multi-snps
+alternative-splicings
+microsattelite
+indels
+others
