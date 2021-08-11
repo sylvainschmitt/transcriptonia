@@ -1,8 +1,7 @@
 infile <- snakemake@input[[1]]
 outfile <-  snakemake@output[[1]] 
 
-# infile <- "data/symphonia.trinity500.kissDE/results_reduced_type_0a.fa"
-# outfile <- "results/species_specific_snps/results_reduced_type_0a.tsv"
+infile <- "data/symphonia.trinity500.kissDE.reduced/results_reduced_type_1.fa"
 
 library(kissDE)
 
@@ -10,6 +9,7 @@ conditions <- c(rep("glo",14),
                 rep("sp1", 23)) # species
 counts <- kissplice2counts(
   infile,
+  counts = 0,
   pairedEnd = T
 )
 dev <- diffExpressedVariants(
