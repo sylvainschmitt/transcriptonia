@@ -40,3 +40,18 @@ vroom::vroom("results/species_specific_snps/results_coherent_type_2.tsv") %>%
 ## Indels
 
 ## Others
+
+```{r othspsp}
+vroom::vroom("results/species_specific_snps/results_coherent_type_4.tsv") %>% 
+  filter(count > 0) %>% 
+  ggplot(aes(individual, snp, fill = log10(count))) +
+  geom_tile() +
+  theme(axis.text = element_blank(), axis.ticks.y = element_blank(), axis.line = element_blank(),
+        legend.position = "bottom") +
+  xlab("Individual") + ylab("SNP") +
+  facet_grid(~ variant + species, scales = "free_x", space = "free_x") +
+  viridis::scale_fill_viridis(option = "C") +
+  ggtitle(
+    paste("N =", length(unique(vroom::vroom("results/species_specific_snps/results_coherent_type_4.tsv")$snp)))
+  )
+```
