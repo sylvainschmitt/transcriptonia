@@ -8,6 +8,6 @@ __default__:
 
 cp_reference:  
   jobname: "kissDE"
-  mem: "2G"
+  mem: "10G"
   cpus: 1
   time: "96:00:00"
