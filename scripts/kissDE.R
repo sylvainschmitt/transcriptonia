@@ -2,6 +2,7 @@ infile <- snakemake@input[[1]]
 outfile <-  snakemake@output[[1]] 
 
 library(kissDE)
+library(tidyverse
 
 conditions <- c(rep("glo",14), 
                 rep("sp1", 23)) # species
