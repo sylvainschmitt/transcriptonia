@@ -1,6 +1,11 @@
 fig:LopezMaestre2016
+fig:ssnpspsp
+fig:msnpspsp
+fig:altspspsp
+fig:msatspsp
+fig:indelsspsp
+fig:othspsp
 todo
-snakemake
 species-specific
 single-snps
 multi-snps
@@ -8,3 +13,10 @@ alternative-splicings
 microsattelite
 indels
 others
+environment-specific
+single-snps-1
+multi-snps-1
+alternative-splicings-1
+microsattelite-1
+indels-1
+others-1

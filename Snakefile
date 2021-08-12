@@ -7,9 +7,11 @@ kissfiles, = glob_wildcards(config["kissDEdir"] + "/{kissfile}.fa")
 
 rule all:
     input:
-        expand("results/species_specific_snps/{kissfile}.tsv", kissfile=kissfiles)
+        expand("results/species_specific_snps/{kissfile}.tsv", kissfile=kissfiles),
+        expand("results/environment_specific_snps/{kissfile}.tsv", kissfile=kissfiles)
         
 # Rules #
 
 ## Species specific ##
-include: "rules/kissDE.smk"
+include: "rules/kissDEspecies.smk"
+include: "rules/kissDEenv.smk"

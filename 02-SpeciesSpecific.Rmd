@@ -8,42 +8,12 @@ opts_chunk$set(
   cache = T, cache.lazy = F)
 ```
 
-# Species-specific
-
-> SNPs specific to the species
-
-This chapter support..
-
-## Single-SNPs 
-
-## Multi-SNPs
-
-## Alternative splicings
-
-## Microsattelite
-
-```{r msatspsp}
-vroom::vroom("results/species_specific_snps/results_coherent_type_2.tsv") %>% 
+```{r make_fig_sp}
+make_fig <- function(file, n = 100){
+  t <- vroom::vroom(file) 
+  t %>% 
   filter(count > 0) %>% 
-  ggplot(aes(individual, snp, fill = log10(count))) +
-  geom_tile() +
-  theme(axis.text = element_blank(), axis.line = element_blank(),
-        legend.position = "bottom") +
-  xlab("Individual") + ylab("SNP") +
-  facet_grid(~ variant + species, scales = "free_x", space = "free_x") +
-  viridis::scale_fill_viridis(option = "C") +
-  ggtitle(
-    paste("N =", length(unique(vroom::vroom("results/species_specific_snps/results_coherent_type_2.tsv")$snp)))
-  )
-```
-
-## Indels
-
-## Others
-
-```{r othspsp}
-vroom::vroom("results/species_specific_snps/results_coherent_type_4.tsv") %>% 
-  filter(count > 0) %>% 
+  filter(snp %in% sample(unique(t$snp), n)) %>% 
   ggplot(aes(individual, snp, fill = log10(count))) +
   geom_tile() +
   theme(axis.text = element_blank(), axis.ticks.y = element_blank(), axis.line = element_blank(),
@@ -52,6 +22,47 @@ vroom::vroom("results/species_specific_snps/results_coherent_type_4.tsv") %>%
   facet_grid(~ variant + species, scales = "free_x", space = "free_x") +
   viridis::scale_fill_viridis(option = "C") +
   ggtitle(
-    paste("N =", length(unique(vroom::vroom("results/species_specific_snps/results_coherent_type_4.tsv")$snp)))
+    paste("N =", length(unique(t$snp)))
   )
+}
+```
+
+# Species-specific
+
+> SNPs specific to the species
+
+## Single-SNPs 
+
+```{r ssnpspsp, fig.cap="Species-specific single SNPs with first 100 counts."}
+make_fig("results/species_specific_snps/results_coherent_type_0a.tsv")
+```
+
+## Multi-SNPs
+
+```{r msnpspsp, fig.cap="Species-specific multiple SNPs with first 100 counts."}
+make_fig("results/species_specific_snps/results_coherent_type_0b.tsv")
+```
+
+## Alternative splicings
+
+```{r altspspsp, fig.cap="Species-specific alternative splicings with first 100 counts."}
+make_fig("results/species_specific_snps/results_coherent_type_1.tsv")
+```
+
+## Microsattelite
+
+```{r msatspsp, fig.cap="Species-specific microsattelites."}
+make_fig("results/species_specific_snps/results_coherent_type_2.tsv", n = 35)
+```
+
+## Indels
+
+```{r indelsspsp, fig.cap="Species-specific indels with first 100 counts."}
+make_fig("results/species_specific_snps/results_coherent_type_3.tsv", n = 100)
+```
+
+## Others
+
+```{r othspsp, fig.cap="Species-specific others with first 100 counts."}
+make_fig("results/species_specific_snps/results_coherent_type_4.tsv", n = 100)
 ```

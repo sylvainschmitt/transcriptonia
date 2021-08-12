@@ -25,14 +25,7 @@ include_graphics("https://phdpages.netlify.app/6b189d4142e8224bff99e28abd11cbfdd
 
 ## ToDo
 
-- [ ] SNPs specific to the species
+- [x] SNPs specific to the species
 - [ ] SNPs specific to the environmental conditions
 - [ ] Identify *S. sp.3*
 - [ ] Test for hybrids individuals (W424 19 & 26)
-
-## Snakemake
-
-```{r}
-include_graphics("dag/dag.svg")
-```
-

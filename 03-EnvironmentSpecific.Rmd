@@ -1,0 +1,44 @@
+```{r setupenvsp, include=FALSE}
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+library(knitr)
+library(tidyverse)
+theme_set(bayesplot::theme_default())
+opts_chunk$set(
+  echo = F, message = F, warning = F, fig.height = 6, fig.width = 8,
+  cache = T, cache.lazy = F)
+```
+
+```{r make_fig_env}
+make_fig <- function(file, n = 100){
+  t <- vroom::vroom(file) 
+  t %>% 
+  filter(count > 0) %>% 
+  filter(snp %in% sample(unique(t$snp), n)) %>% 
+  ggplot(aes(individual, snp, fill = log10(count))) +
+  geom_tile() +
+  theme(axis.text = element_blank(), axis.ticks.y = element_blank(), axis.line = element_blank(),
+        legend.position = "bottom") +
+  xlab("Individual") + ylab("SNP") +
+  facet_grid(~ variant + species, scales = "free_x", space = "free_x") +
+  viridis::scale_fill_viridis(option = "C") +
+  ggtitle(
+    paste("N =", length(unique(t$snp)))
+  )
+}
+```
+
+# Environment-specific
+
+> SNPs specific to the environment
+
+## Single-SNPs 
+
+## Multi-SNPs
+
+## Alternative splicings
+
+## Microsattelite
+
+## Indels
+
+## Others
