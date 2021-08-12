@@ -39,6 +39,10 @@ make_fig <- function(file, n = 100){
 
 ## Microsattelite
 
+```{r msatenvsp, fig.cap="Species-specific microsattelites."}
+make_fig("results/environment_specific_snps/results_coherent_type_2.tsv", n = 3)
+```
+
 ## Indels
 
 ## Others

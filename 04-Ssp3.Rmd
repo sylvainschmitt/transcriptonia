@@ -1,0 +1,18 @@
+```{r setupssp3, include=FALSE}
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+library(knitr)
+library(tidyverse)
+theme_set(bayesplot::theme_default())
+opts_chunk$set(
+  echo = F, message = F, warning = F, fig.height = 6, fig.width = 8,
+  cache = T, cache.lazy = F)
+```
+
+# *Symphonia sp.3*
+
+> identify *S. sp.3* individuals
+
+- [ ] map transcripts on the reference from *symcapture*
+- [ ] find overlapping SNPs
+- [ ] find *S. sp.3* specific SNPs
+- [ ] look at their presence in *transcriptonia* individuals

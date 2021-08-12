@@ -5,6 +5,7 @@ fig:altspspsp
 fig:msatspsp
 fig:indelsspsp
 fig:othspsp
+fig:msatenvsp
 todo
 species-specific
 single-snps
@@ -20,3 +21,5 @@ alternative-splicings-1
 microsattelite-1
 indels-1
 others-1
+symphonia-sp.3
+hybrids

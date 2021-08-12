@@ -1,0 +1,17 @@
+```{r setuphyb, include=FALSE}
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+library(knitr)
+library(tidyverse)
+theme_set(bayesplot::theme_default())
+opts_chunk$set(
+  echo = F, message = F, warning = F, fig.height = 6, fig.width = 8,
+  cache = T, cache.lazy = F)
+```
+
+# Hybrids
+
+> identify hybird individuals
+
+- [ ] map transcripts on the reference from *symcapture*
+- [ ] find overlapping SNPs
+- [ ] make `admixture` with K=3 for all individuals from *symcapture* & *transcriptonia*
