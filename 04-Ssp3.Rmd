@@ -11,19 +11,11 @@ opts_chunk$set(
 
 # *Symphonia sp.3*
 
+**No overlapping SNPs were found !!**
+
 > identify *S. sp.3* individuals
 
 - [x] map transcripts on the reference from *symcapture*
-- [ ] find overlapping SNPs
+- [x] find overlapping SNPs
 - [ ] find *S. sp.3* specific SNPs
 - [ ] look at their presence in *transcriptonia* individuals
-
-```{r, eval=F}
-library(vcfR)
-capt_snps <- read.vcfR("data/symcapture.all.biallelic.snp.filtered.nonmissing.paracou.vcf.gz")
-capt_snps <- vcfR2tidy(capt_snps)
-trsc_snps <- vroom::vroom("")
-```
-
-* docker://gelog/plink
-* docker://brodyj/plink2

@@ -1,45 +1,46 @@
 tsvin <- snakemake@input[[1]]
 psl <-  snakemake@input[[2]]
 tsvout <-  snakemake@output[[1]]
+bedout <-  snakemake@output[[2]]
 
-stop("test")
-
-tsvin <- "data/k2rt/symphonia_juv_fullsample_trinity500_k2rt_type_0a_mainOutput.tsv"
-psl <-  "data/ssp3/transcripts.psl"
+# stop("test")
+# 
+# tsvin <- "results/ssp3/snps_pos0.tsv"
+# psl <-  "results/ssp3/snps.psl"
+# tsvout <- "results/ssp3/snps.tsv"
+# bedout <- "results/ssp3/snps_capture.bed"
 
 library(tidyverse)
 
-N <- 500
-
-alns <- read_tsv(psl, skip = 5, 
-                 col_names = c("matches", "misMatches", "repMatches", "nCount", 
-                               "qNumInsert", "qBaseInsert",
-                               "tNumInsert", "tBaseInsert", "strand", 
-                               "qName", "qSize", "qStart", "qEnd", 
-                               "tName", "tSize", "tStart", "tEnd", 
-                               "blockCount", "blockSizes", "qStarts", "tStarts"), 
-                 col_types = cols(blockSizes = col_character(), tStarts = col_character())) %>% 
-  separate(qName, c("scf", "snvStart", "snvStop")) %>% 
-  mutate(pos = as.numeric(snvStart) + 501) %>% 
-  mutate(`Locus ID` = paste0(scf, "_", pos)) %>% 
-  select(-snvStart, -snvStop, -scf, -pos)
-
-read_tsv(tsvin) %>% 
-  filter(`Mutation category` == "SM") %>% 
-  left_join(alns) %>% 
-  dplyr::select(-X2, -`Mutation category`, -`Chromosomal location`, -`f(alt)pool >0.5%`) %>% 
-  dplyr::rename(locus = `Locus ID`, origin = `Origin of the mutation`) %>% 
-  mutate(POS0 = 500+1) %>% # PSL 0-indexed !!
-  filter(qStart <= POS0, qEnd >= POS0) %>% 
-  group_by(Mutation) %>% 
+alns <- vroom::vroom(psl, skip = 5, 
+                     col_names = c("matches", "misMatches", "repMatches", "nCount", 
+                                   "qNumInsert", "qBaseInsert",
+                                   "tNumInsert", "tBaseInsert", "strand", 
+                                   "qName", "qSize", "qStart", "qEnd", 
+                                   "tName", "tSize", "tStart", "tEnd", 
+                                   "blockCount", "blockSizes", "qStarts", "tStarts"), 
+                     col_types = cols(blockSizes = col_character(), tStarts = col_character())) %>% 
+  rename(snp = qName) %>% 
+  left_join(vroom::vroom(tsvin)) %>% 
+  mutate(snp_pos = pos0+1) %>% 
+  filter(qStart <= snp_pos, qEnd >= snp_pos) %>% 
+  group_by(snp) %>% 
   filter(matches == max(matches)) %>% 
+  sample_n(1) %>% 
   separate_rows(blockSizes, qStarts, tStarts, sep = ",", convert = T) %>% 
   filter(!is.na(qStarts)) %>% 
-  filter(qStarts <= POS0) %>% 
-  mutate(posSNV = tStarts + POS0 - qStarts) %>% 
+  filter(qStarts <= snp_pos) %>% 
+  mutate(posSNP = tStarts + snp_pos - qStarts) %>% 
   mutate(tEnd = tStarts + blockSizes) %>% 
-  filter(posSNV <= tEnd) %>% 
-  dplyr::select(locus, Mutation, origin, `f(alt)pool`, tName, posSNV) %>% 
-  dplyr::rename(POS = posSNV, CHROM = tName) %>% 
+  filter(posSNP <= tEnd) %>% 
+  dplyr::select(tName, snp, posSNP) %>% 
+  dplyr::rename(pos = posSNP, scf = tName) %>% 
   unique() %>% 
-  write_tsv(tsvout)
+  group_by(snp) %>% 
+  sample_n(1)
+
+write_tsv(alns, tsvout)
+alns %>% 
+  mutate(start = max(1, pos-2), stop = pos+2) %>% 
+  select(snp, start, stop) %>% 
+  write_tsv(bedout, col_names = F)

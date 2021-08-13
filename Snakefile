@@ -9,7 +9,7 @@ rule all:
     input:
         # expand("results/species_specific_snps/{kissfile}.tsv", kissfile=kissfiles),
         # expand("results/environment_specific_snps/{kissfile}.tsv", kissfile=kissfiles),
-        "results/ssp3/snps.tsv"
+        "results/ssp3/symcapture.vcf"
         
 # Rules #
 
@@ -23,3 +23,4 @@ include: "rules/snps2bed.smk"
 include: "rules/bedtools_getfasta.smk"
 include: "rules/blat.smk"
 include: "rules/psl2pos.smk"
+include: "rules/bedtools_intersect.smk"

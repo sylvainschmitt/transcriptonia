@@ -24,7 +24,7 @@
 <meta name="author" content="Sylvain Schmitt" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,7 +120,7 @@ This book is in <b><a href="open.html#open">Open Review</a></b>. I want your fee
 <h1 class="title">transcriptonia</h1>
 <h2 class="subtitle"><em>Transcriptomics of <em>Symphonia globulifera</em>.</em></h2>
 <p class="author"><em>Sylvain Schmitt</em></p>
-<p class="date"><em>2021-08-12</em></p>
+<p class="date"><em>2021-08-13</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -192,6 +192,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

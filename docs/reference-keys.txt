@@ -5,6 +5,8 @@ fig:altspspsp
 fig:msatspsp
 fig:indelsspsp
 fig:othspsp
+fig:ssnpenvsp
+fig:msnpenvsp
 fig:altspenvsp
 fig:msatenvsp
 fig:indelsenvsp
@@ -26,5 +28,3 @@ indels-1
 others-1
 symphonia-sp.3
 hybrids
-fig:ssnpenvsp
-fig:msnpenvsp
