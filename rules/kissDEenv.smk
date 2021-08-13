@@ -1,7 +1,7 @@
 rule kissDEenv:
     input:
-        expand("{dir}/{kissfile}.fa", dir=config["kissDEdir"], allow_missing=True),
-        expand("{dir}/juvRNAlibrariesDistributions.txt", dir=config["kissDEdir"])
+        "data/symphonia.trinity500.kissDE/{kissfile}.fa",
+        "data/symphonia.trinity500.kissDE/juvRNAlibrariesDistributions.txt"
     output:
         "results/environment_specific_snps/{kissfile}.tsv"
     log:

@@ -3,15 +3,23 @@
 
 configfile: "config/config.data.yml"
 
-kissfiles, = glob_wildcards(config["kissDEdir"] + "/{kissfile}.fa")
+kissfiles, = glob_wildcards("data/symphonia.trinity500.kissDE/{kissfile}.fa")
 
 rule all:
     input:
-        expand("results/species_specific_snps/{kissfile}.tsv", kissfile=kissfiles),
-        expand("results/environment_specific_snps/{kissfile}.tsv", kissfile=kissfiles)
+        # expand("results/species_specific_snps/{kissfile}.tsv", kissfile=kissfiles),
+        # expand("results/environment_specific_snps/{kissfile}.tsv", kissfile=kissfiles),
+        "results/ssp3/snps.tsv"
         
 # Rules #
 
-## Species specific ##
+## Species & environment specific ##
 include: "rules/kissDEspecies.smk"
 include: "rules/kissDEenv.smk"
+
+## S. sp3 ##
+include: "rules/samtools_faidx.smk"
+include: "rules/snps2bed.smk"
+include: "rules/bedtools_getfasta.smk"
+include: "rules/blat.smk"
+include: "rules/psl2pos.smk"

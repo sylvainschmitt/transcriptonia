@@ -2,6 +2,7 @@
 rm(list = ls()) ; invisible(gc()) ; set.seed(42)
 library(knitr)
 library(tidyverse)
+library(Biostrings)
 theme_set(bayesplot::theme_default())
 opts_chunk$set(
   echo = F, message = F, warning = F, fig.height = 6, fig.width = 8,
@@ -12,7 +13,17 @@ opts_chunk$set(
 
 > identify *S. sp.3* individuals
 
-- [ ] map transcripts on the reference from *symcapture*
+- [x] map transcripts on the reference from *symcapture*
 - [ ] find overlapping SNPs
 - [ ] find *S. sp.3* specific SNPs
 - [ ] look at their presence in *transcriptonia* individuals
+
+```{r, eval=F}
+library(vcfR)
+capt_snps <- read.vcfR("data/symcapture.all.biallelic.snp.filtered.nonmissing.paracou.vcf.gz")
+capt_snps <- vcfR2tidy(capt_snps)
+trsc_snps <- vroom::vroom("")
+```
+
+* docker://gelog/plink
+* docker://brodyj/plink2

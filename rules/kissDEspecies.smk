@@ -1,6 +1,6 @@
 rule kissDEspecies:
     input:
-        expand("{dir}/{kissfile}.fa", dir=config["kissDEdir"], allow_missing=True)
+        "data/symphonia.trinity500.kissDE/{kissfile}.fa"
     output:
         "results/species_specific_snps/{kissfile}.tsv"
     log:

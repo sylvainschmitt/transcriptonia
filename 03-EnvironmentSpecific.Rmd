@@ -33,16 +33,36 @@ make_fig <- function(file, n = 100){
 
 ## Single-SNPs 
 
+```{r ssnpenvsp, fig.cap="Environment-specific single SNP with first 100 counts."}
+make_fig("results/environment_specific_snps/results_coherent_type_0a.tsv")
+```
+
 ## Multi-SNPs
+
+```{r msnpenvsp, fig.cap="Environment-specific multi SNP with first 100 counts."}
+make_fig("results/environment_specific_snps/results_coherent_type_0b.tsv")
+```
 
 ## Alternative splicings
 
+```{r altspenvsp, fig.cap="Environment-specific microsattelites with first 100 counts."}
+make_fig("results/environment_specific_snps/results_coherent_type_1.tsv")
+```
+
 ## Microsattelite
 
-```{r msatenvsp, fig.cap="Species-specific microsattelites."}
+```{r msatenvsp, fig.cap="Environment-specific microsattelites."}
 make_fig("results/environment_specific_snps/results_coherent_type_2.tsv", n = 3)
 ```
 
 ## Indels
 
+```{r indelsenvsp, fig.cap="Environment-specific indels with first 100 counts."}
+make_fig("results/environment_specific_snps/results_coherent_type_3.tsv")
+```
+
 ## Others
+
+```{r othersenvsp, fig.cap="Environment-specific other markers with first 100 counts."}
+make_fig("results/environment_specific_snps/results_coherent_type_4.tsv")
+```

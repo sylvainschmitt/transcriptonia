@@ -5,7 +5,10 @@ fig:altspspsp
 fig:msatspsp
 fig:indelsspsp
 fig:othspsp
+fig:altspenvsp
 fig:msatenvsp
+fig:indelsenvsp
+fig:othersenvsp
 todo
 species-specific
 single-snps
@@ -23,3 +26,5 @@ indels-1
 others-1
 symphonia-sp.3
 hybrids
+fig:ssnpenvsp
+fig:msnpenvsp
